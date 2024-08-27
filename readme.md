@@ -18,7 +18,7 @@
       - `docker build -t my-node-app:dev --target dev .` 构建镜像
       - `docker run -d --name my-node-app-dev -p 3000:3000 my-node-app:dev` 启动运行容器
         - 这个启动运行会自动退出，后面再看吧，相同的镜像用docker-compose不会自动退出
-        - 
+        - 自动退出的话切换成交互式运行，直接看有没有报错信息即可，自动退出一般都是有项目启动报错
     - 2、用docker-compose编排的方式构建镜像运行容器
       - `docker-compose build` 编排构建
       - `docker-compose up` 编排运行容器
@@ -26,8 +26,25 @@
 ###  玩转docker基础项目
 
 > 参考：https://juejin.cn/post/7147483669299462174
+> 参考：https://juejin.cn/post/7160972042757079077
+
+
+
+#### 小试开发环境玩玩
 
 见vue-demo目录
+
+1. 基于dockerfile构建镜像
+  - `docker build -f ./Dockerfile -t test:0.0.1 .`
+2. 运行镜像容器直接就可以访问vuei项目了
+  - `docker run -d -p 8080:8080 test:0.0.1`
+3. 以后部署的时候，就把这个镜像上传上去了运行镜像就直接能访问项目了
+
+#### 生产环境部署
+
+见vite-demo-prod
+
+
 
 ## 遇到的问题
 
