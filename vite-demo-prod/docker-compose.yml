@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  # web应用构建vite项目 
+  # web:
+  #   build: 
+  #     context: .
+  #     dockerfile: Dockerfile.anywhere
+    #   target: prod
+    # volumes:
+    #   - .:/home/app-vite
+    # command: npm run start
+    # environment:
+      # NODE_ENV: de
+  # nginx服务器配置
+  nginx-config:
+    image: nginx
+    container_name: nginx-container
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/html:/usr/share/nginx/html
+      - ./nginx/logs:/var/log/nginx
+      - ./nginx/conf:/etc/nginx/conf.d
+    privileged: true
+    restart: always

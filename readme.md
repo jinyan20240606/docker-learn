@@ -18,7 +18,7 @@
       - `docker build -t my-node-app:dev --target dev .` 构建镜像
       - `docker run -d --name my-node-app-dev -p 3000:3000 my-node-app:dev` 启动运行容器
         - 这个启动运行会自动退出，后面再看吧，相同的镜像用docker-compose不会自动退出
-        - 自动退出的话切换成交互式运行，直接看有没有报错信息即可，自动退出一般都是有项目启动报错
+        - 自动退出的话切换成交互式运行，直接看有没有报错信息即可，自动退出一般都是有报错
     - 2、用docker-compose编排的方式构建镜像运行容器
       - `docker-compose build` 编排构建
       - `docker-compose up` 编排运行容器
@@ -43,6 +43,13 @@
 #### 生产环境部署
 
 见vite-demo-prod
+
+1. Dockerfile.anywhere 用来直接构建镜像的，用的node服务托管的dist目录
+  - `docker build -f ./Dockerfile.anywhere -t vite-prod:1 .`
+2. docker-compose.yml文件用来部署nginx服务器的
+  - 通过挂载数据卷技术实现宿主机上自定义容器内的nginx配置和www资源目录
+  - 直接 `docker-compose up` 启动容器 打开localhost就能访问到宿主机内的自定义的html了
+3. TODO：尝试新建Dockerfile.web和扩展docker-compose.yml实现打包vite项目，用nginx搭建vite项目的托管服务
 
 
 
