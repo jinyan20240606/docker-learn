@@ -1,20 +1,16 @@
-FROM node:18-alpine as base
-RUN mkdir -p /home/app-vite/
-WORKDIR /home/app-vite/
+FROM node:18-alpine AS base
+WORKDIR /home/app-vite
 COPY package*.json / 
 
-# 下面是多阶段构建，可以针对不同环境构建不同镜像;构建时需要指明要触发哪个阶段production和dev
 # 生产环境
-FROM base as prod 
-ENV NODE_ENV=production 
+FROM base AS build-stage
 RUN npm install
 COPY . .
 RUN npm run build
 
 # 开发环境
-FROM base as dev 
+FROM base AS dev 
 ENV NODE_ENV=development 
 RUN npm install 
 COPY . . 
-EXPOSE 5173
-CMD ["npm", "dev"] 
+CMD ["npm", "start"] 

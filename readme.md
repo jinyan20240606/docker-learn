@@ -58,4 +58,3 @@
 1. docker-compose-node-web：上面直接构建镜像运行容器发现运行不起来
     - 原因：直接将dockerignore里忽略node_modules，导致手动构建镜像时，没有把依赖打进去，所以报错容器启动失败。把dockerignore文件删了就能docker扩展里右键运行就启动起来了
     - 用docker-compose构建运行为什么可以：因为compose配置文件里设置了volumes卷挂载选项会自动将当前所有文件挂载到/src下面所以依赖也过去了。 
-    - 卷挂载时不会遵循dockerignore忽略规则。这个只是控制构建镜像时的忽略，不要复制到镜像的工作目录里。卷挂载是挂载到创建的容器里，跟镜像目录不是一个层级。一般正规都是node_modules存储到容器目录里 而不是镜像目录里

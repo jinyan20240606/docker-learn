@@ -2,16 +2,17 @@ version: '3.8'
 
 services:
   # web应用构建vite项目 
-  # web:
-  #   build: 
-  #     context: .
-  #     dockerfile: Dockerfile.anywhere
-    #   target: prod
-    # volumes:
-    #   - .:/home/app-vite
+  web:
+    container_name: viteweb-contanier
+    build: 
+      context: .
+      dockerfile: Dockerfile.web
+      target: build-stage
     # command: npm run start
     # environment:
-      # NODE_ENV: de
+    #   NODE_ENV: de
+    privileged: true
+    restart: on-failure
   # nginx服务器配置
   nginx-config:
     image: nginx
