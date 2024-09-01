@@ -51,10 +51,11 @@
   - 直接 `docker-compose up` 启动容器 打开localhost就能访问到宿主机内的自定义的html了
 3. TODO：尝试新建Dockerfile.web和扩展docker-compose.yml实现打包vite项目，用nginx搭建vite项目的托管服务
 
+### 实操Makefile脚本
 
+用于编写自动化脚本执行工具，比shell脚本强
+运行默认目标（通常是 all）：`make`
+运行特定目标：`make install`
 
-## 遇到的问题
-
-1. docker-compose-node-web：上面直接构建镜像运行容器发现运行不起来
-    - 原因：直接将dockerignore里忽略node_modules，导致手动构建镜像时，没有把依赖打进去，所以报错容器启动失败。把dockerignore文件删了就能docker扩展里右键运行就启动起来了
-    - 用docker-compose构建运行为什么可以：因为compose配置文件里设置了volumes卷挂载选项会自动将当前所有文件挂载到/src下面所以依赖也过去了。 
+Makefile 更适合需要清晰依赖关系管理的项目，并且能够很好地与 CI/CD 系统集成。
+Shell 脚本 更适合需要高度定制化逻辑和灵活处理文件操作的项目
