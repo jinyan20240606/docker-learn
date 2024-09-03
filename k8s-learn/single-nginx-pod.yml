@@ -1,0 +1,11 @@
+# 单容器Pod demo示例
+apiVersion: v1
+kind: Pod
+metadata:
+  name: first-pod
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: my-first-pod
+    image: nginx

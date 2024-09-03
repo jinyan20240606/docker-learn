@@ -1,0 +1,26 @@
+# SideCar模式：下面以web应用构建dist拷贝目录作为辅助容器，nginx部署是最后的主容器
+# 可以在一个Pod中按照顺序启动一个或多个辅助容器，来完成一些独立于主进程（主容器）之外的工作
+# 完成工作后这些辅助容器会依次退出，之后主容器才会启动，这种容器设计模式叫做sidecar
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-2
+spec:
+  initContainers: # 所有spec.initContainers定义的容器，都会比spec.containers定义的用户容器先启动
+  - image: kevinyan/front-app:v2
+    name: front
+    command: ["cp", "/www/application/*", "/app"]
+    volumeMounts:
+    - mountPath: /app
+      name: app-volume
+  containers: # Init容器会按顺序逐一启动，直到它们都启动并且退出了，用户容器才会启动
+  - image: nginx
+    name: nginx
+    ports:
+      - containerPort: 80 # 定义容器提供服务的端口
+    volumeMounts:
+    - mountPath: /usr/share/nginx/html
+      name: app-volume
+  volumes:
+  - name: app-volume
+    emptyDir: {}
