@@ -10,5 +10,5 @@
     - 所以对于docker-desktop的节点IP默认就是localhost，对于minikube需要`minikube ip` 获取
     - `localhost:30080` 就能访问了Pod副本中的某一个应用了
 
-3. deployment
+3. deployment：参考https://mp.weixin.qq.com/s?__biz=MzUzNTY5MzU2MA==&mid=2247485643&idx=1&sn=6460bf2e170e4b2e8ebb2882bfe7c60f&chksm=fa80d95ccdf7504ad9b5e3ba7ad3dad6a25347a7b0aad4636523cb1ba878cebbc480bf2153a0&token=2057376102&lang=zh_CN&scene=21#wechat_redirect
     - `kubectl get deployments`
