@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: web-app
-        image: node-agent
+        image: nginx
         ports:
-        - containerPort: 3000  # 应用程序暴露的端口
+        - containerPort: 80  # 应用程序暴露的端口
